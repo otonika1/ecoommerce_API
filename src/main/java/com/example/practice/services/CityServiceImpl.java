@@ -38,7 +38,7 @@ public class CityServiceImpl implements CityService{
     public CityEntity update(Long id, CityEntity cityEntity) throws Exception {
         CityEntity city = cityRepository.findById(id).orElseThrow(() -> new Exception("CLIENT NOT FOUND"));
         GeneralUtil.getCopyOf(cityEntity, city);
-        return cityRepository.save(cityEntity);
+        return cityRepository.save(city);
     }
 
     @Override

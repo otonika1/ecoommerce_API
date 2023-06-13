@@ -42,14 +42,14 @@ public class ClientServiceImpl implements ClientService {
     public ClientEntity update(Long id, ClientEntity clientEntity) throws Exception {
         ClientEntity client = clientRepository.findById(id).orElseThrow(() -> new Exception("CLIENT NOT FOUND"));
         GeneralUtil.getCopyOf(clientEntity, client);
-        return clientRepository.save(clientEntity);
+        return clientRepository.save(client);
     }
 
     @Override
     public void delete(Long id) {
         clientRepository.deleteById(id);
     }
-//    @Override
+    @Override
     public Slice<ClientEntity> search(SearchClient searchClient, Paging paging) {
         String name = null;
         if (searchClient.getName() != null && !searchClient.getName().equals("")) {
@@ -58,4 +58,8 @@ public class ClientServiceImpl implements ClientService {
         Pageable pageable = PageRequest.of(paging.getPage(), paging.getSize(), Sort.by("hire_date").descending());
         return clientRepository.search(searchClient.getClientId(), name, pageable);
     }
+
+
+
+
 }

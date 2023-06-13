@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService{
     public ProductEntity update(Long id, ProductEntity productEntity) throws Exception {
         ProductEntity product = productRepository.findById(id).orElseThrow(() -> new Exception("PRODUCT NOT FOUND"));
         GeneralUtil.getCopyOf(productEntity, product);
-        return productRepository.save(productEntity);
+        return productRepository.save(product);
     }
 
     @Override

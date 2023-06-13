@@ -36,7 +36,7 @@ public class CarouselServiceImpl implements CarouselService{
     public CarouselEntity updateCarousel(Long id, CarouselEntity carouselEntity) throws Exception {
         CarouselEntity carousel = carouselRepository.findById(id).orElseThrow(() -> new Exception("CAROUSEL NOT FOUND"));
         GeneralUtil.getCopyOf(carouselEntity, carousel);
-        return carouselRepository.save(carouselEntity);
+        return carouselRepository.save(carousel);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.practice.controller;
 
 import com.example.practice.dto.SearchClient;
+import com.example.practice.dto.request.Payment;
 import com.example.practice.dto.request.RequestData;
 import com.example.practice.entity.CarouselEntity;
 import com.example.practice.entity.ClientEntity;
@@ -47,4 +48,5 @@ public class ClientController {
     public Slice<ClientEntity> search(@RequestBody RequestData<SearchClient> rd) {
         return clientService.search(rd.getData(), rd.getPaging());
     }
+
 }
