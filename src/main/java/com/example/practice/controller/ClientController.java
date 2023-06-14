@@ -49,4 +49,8 @@ public class ClientController {
         return clientService.search(rd.getData(), rd.getPaging());
     }
 
+    @RequestMapping(value = "/pay/{id}", method = RequestMethod.PUT, produces = {"application/json"})
+    public ClientEntity pay(@PathVariable Long id, Double price) throws Exception {
+        return  clientService.pay(id,price);
+    }
 }

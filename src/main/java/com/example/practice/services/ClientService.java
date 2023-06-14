@@ -20,4 +20,6 @@ public interface ClientService {
     void delete(Long id);
 
     Slice<ClientEntity> search(SearchClient searchClient, Paging paging);
+
+    ClientEntity pay(Long id, Double price) throws Exception;
 }

@@ -61,5 +61,12 @@ public class ClientServiceImpl implements ClientService {
 
 
 
+    @Override
+    public ClientEntity pay(Long id, Double price) throws Exception {
+        ClientEntity client = clientRepository.findById(id).orElseThrow(() -> new Exception("CLIENT NOT FOUND"));
+        //GeneralUtil.getCopyOf(clientEntity, client);
+        client.setBalance(client.getBalance() - price);
+        return clientRepository.save(client);
+    }
 
 }
