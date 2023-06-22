@@ -31,7 +31,7 @@ public class AuthenticationService {
         GeneralUtil.getCopyOf(request, user, "password");
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         repository.save(user);
-        var jwtToken = jwtService.generateToken((UserDetails) user, user.getRole(),user.getBalance(), user.getFirstname());
+        var jwtToken = jwtService.generateToken((UserDetails) user, user.getRole(),user.getBalance(), user.getFirstname(), user.getId());
         return new AuthenticationResponse(jwtToken);
     }
 
@@ -44,7 +44,7 @@ public class AuthenticationService {
         );
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
-        var jwtToken = jwtService.generateToken((UserDetails) user, user.getRole(),user.getBalance(),user.getFirstname());
+        var jwtToken = jwtService.generateToken((UserDetails) user, user.getRole(),user.getBalance(),user.getFirstname(), user.getId());
         return new AuthenticationResponse(jwtToken);
     }
 }

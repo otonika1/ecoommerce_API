@@ -65,8 +65,14 @@ public class ClientServiceImpl implements ClientService {
     public ClientEntity pay(Long id, Double price) throws Exception {
         ClientEntity client = clientRepository.findById(id).orElseThrow(() -> new Exception("CLIENT NOT FOUND"));
         //GeneralUtil.getCopyOf(clientEntity, client);
-        client.setBalance(client.getBalance() - price);
-        return clientRepository.save(client);
+        if(client.getBalance() > price){
+            client.setBalance(client.getBalance() - price);
+            return clientRepository.save(client);
+        }else{
+            throw new Exception("INSUFFICIENT_BALANCE");
+        }
+
+
     }
 
 }
