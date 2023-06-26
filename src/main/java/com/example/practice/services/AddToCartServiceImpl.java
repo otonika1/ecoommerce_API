@@ -1,11 +1,9 @@
 package com.example.practice.services;
 
 import com.example.practice.entity.AddToCart;
-import com.example.practice.entity.CarouselEntity;
-import com.example.practice.entity.ProductEntity;
+import com.example.practice.entity.History;
 import com.example.practice.repository.AddToCartRepository;
 import com.example.practice.util.GeneralUtil;
-import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +29,10 @@ public class AddToCartServiceImpl implements AddToCartService{
         return addToCartRepository.findById(id);
     }
     @Override
+    public List<AddToCart> findByClientId(Long clientId) {
+        return addToCartRepository.findByClientId(clientId);
+    }
+    @Override
     public AddToCart create(AddToCart addToCart) throws Exception {
         return addToCartRepository.save(addToCart);
     }
@@ -45,5 +47,9 @@ public class AddToCartServiceImpl implements AddToCartService{
     @Override
     public void delete(Long id) {
         addToCartRepository.deleteById(id);
+    }
+    @Override
+    public void deleteAll() {
+        addToCartRepository.deleteAll();
     }
 }

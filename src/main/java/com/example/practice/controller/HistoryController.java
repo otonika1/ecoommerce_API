@@ -1,7 +1,8 @@
 package com.example.practice.controller;
 
 import com.example.practice.entity.AddToCart;
-import com.example.practice.services.AddToCartService;
+import com.example.practice.entity.History;
+import com.example.practice.services.HistoryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,40 +10,42 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/addtocart")
-public class AddToCartController {
-    private final AddToCartService addToCartService;
-    public AddToCartController(AddToCartService addToCartService) {
-        this.addToCartService = addToCartService;
+@RequestMapping("api/history")
+public class HistoryController {
+    private final HistoryService historyService;
+
+    public HistoryController(HistoryService historyService) {
+        this.historyService = historyService;
     }
+
     @RequestMapping(value = "/all",method = RequestMethod.GET, produces = {"application/json"})
-    public List<AddToCart> getAll(){
-        return addToCartService.getAll();
+    public List<History> getAll(){
+        return historyService.getAll();
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET, produces = {"application/json"})
-    public Optional<AddToCart> findById(@PathVariable("id") Long id){
-        return addToCartService.findById(id);
+    public Optional<History> findById(@PathVariable("id") Long id){
+        return historyService.findById(id);
     }
     @RequestMapping(value = "clientId/{client_id}",method = RequestMethod.GET, produces = {"application/json"})
-    public List<AddToCart> findByClientId(@PathVariable("client_id") Long clientId){
-        return addToCartService.findByClientId(clientId);
+    public List<History> findByClientId(@PathVariable("client_id") Long clientId){
+        return historyService.findByClientId(clientId);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = {"application/json"})
-    public AddToCart create(@RequestBody AddToCart addToCart) throws Exception {
-        return  addToCartService.create(addToCart);
+    public History create(@RequestBody History history) throws Exception {
+        return  historyService.create(history);
     }
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT, produces = {"application/json"})
-    public AddToCart update(@PathVariable Long id,@RequestBody AddToCart addToCart) throws Exception {
-        return  addToCartService.update(id,addToCart);
+    public History update(@PathVariable Long id,@RequestBody History history) throws Exception {
+        return  historyService.update(id,history);
     }
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = {"application/json"})
     public void delete(@PathVariable("id") Long id){
-        addToCartService.delete(id);
+        historyService.delete(id);
     }
     @RequestMapping(value = "/deleteAll", method = RequestMethod.DELETE, produces = {"application/json"})
     public void deleteAll(){
-        addToCartService.deleteAll();
+        historyService.deleteAll();
     }
 }
